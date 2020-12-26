@@ -1,5 +1,3 @@
-###h3-5 extent
-#############
 rm(list = ls())
 library(dplyr)
 
@@ -11,7 +9,6 @@ data0 <- read.csv(paste0(wd,'test/',file),stringsAsFactors = FALSE)
 files <- list.files(pattern='anova',paste0(wd,'test/SD010/'))
 all <- data.frame()
 for (file in files){
-  #file <- files[1] 
   data <- read.csv(paste0(wd,'test/SD010/',file),stringsAsFactors = FALSE)
   all <- rbind(all,data)
 } 
@@ -19,7 +16,6 @@ for (file in files){
 filesCb <- list.files(pattern='Cb.csv',paste0(wd,'test/'))
 allCb <- data.frame()
 for (file in filesCb[2:4]){
-#file <- files[1] 
 data <- read.csv(paste0(wd,'test/',file),stringsAsFactors = FALSE)
 allCb <- rbind(allCb,data)
 } 
@@ -61,7 +57,6 @@ all_agg_ext <- data.frame(matrix(nrow=3,ncol=3))
 colnames(all_agg_ext) <- c('Cat','Mean','SD')
 all_agg_ext$Cat <- c('h5','h4','h3')
 for (cat in c('h5','h4','h3')){
-  #cat <- 'h5'
   flt <- allCb %>%
     filter(Time=='HurricaneSeasonRlt' & ImpOverTimeDistCon==1 & Category==cat)
   wid <- flt[which(flt$Distance==max(flt$Distance, na.rm = TRUE)),]
@@ -104,14 +99,9 @@ flt0_dur <- data0 %>%
 
 
 cats <- c(5,4,3)
-#ylbs <- c('H5','H4','H3')
-#ylbspos <- rep(0.6,4)
-#pnl <- letters[1:4]
 cols <- c(rgb(62,84,150, maxColorValue = 255),
           rgb(10,144,134,maxColorValue = 255),
           rgb(0.8,0.1,0.1))
-#rgb(77,79,83,maxColorValue = 255),
-#rgb(116,118,120, maxColorValue = 255))
 
 #with literature
 if (TRUE) {
@@ -127,7 +117,6 @@ arrows((all_agg_EVI$Mean-all_agg_EVI$SD),c(3,2,1),(all_agg_EVI$Mean+all_agg_EVI$
          length=0.05,angle=90,code=3,lwd=1,col=rev(cols))  
 
 for(r in 1:nrow(flt0_EVI)){
-#r<-1  
 if(flt0_EVI$Min[r]==flt0_EVI$Max[r]){
 points(flt0_EVI$Min[r]/100,flt0_EVI$Cat[r]-2,pch=16,lwd=2,cex=1.9,col=adjustcolor(cols[flt0_EVI$Cat[r]-2],alpha.f = 0.2))}
 if(flt0_EVI$Min[r]!=flt0_EVI$Max[r]){
@@ -142,7 +131,6 @@ axis(1,at=seq(0,1,0.2),labels=FALSE,tck=-0.07,col='black',col.ticks='black', col
 axis(1,at=seq(0,1,0.2), labels=paste0('-',seq(0,100,20)), lwd=0, line=-0.7,col.axis='black',cex.axis=0.8)
 mtext('Relative Change (%)', side=1, line=1.2, col='black', cex=0.55)
 text(-0.18,4,paste0('a'),col='black',cex=1,pos=4, font=2)
-#text(-0.18,4,paste0('b'),col='black',cex=1,pos=4, font=2)
 }
 
 #area
@@ -152,8 +140,7 @@ plot(all_agg_area$Mean,c(3,2,1),col=rev(cols),pch=16, cex=1.3,
 arrows((all_agg_area$Mean-all_agg_area$SD),c(3,2,1),(all_agg_area$Mean+all_agg_area$SD),c(3,2,1),
          length=0.05,angle=90,code=3,lwd=1,col=rev(cols))  
   
-for(r in 1:nrow(flt0_area)){
-#r<-1  
+for(r in 1:nrow(flt0_area)){ 
 if(flt0_area$Min[r]==flt0_area$Max[r]){
 points(flt0_area$Min[r]/100,flt0_area$Cat[r]-2,pch=16,lwd=2,cex=1.9,col=adjustcolor(cols[flt0_area$Cat[r]-2],alpha.f = 0.2))}
 if(flt0_area$Min[r]!=flt0_area$Max[r]){
@@ -177,8 +164,7 @@ if(TRUE){
   arrows((all_agg_dur$Mean-all_agg_dur$SD),c(3,2,1),(all_agg_dur$Mean+all_agg_dur$SD),c(3,2,1),
          length=0.05,angle=90,code=3,lwd=1,col=rev(cols))  
   
-  for(r in 1:nrow(flt0_dur)){
-    #r<-1  
+  for(r in 1:nrow(flt0_dur)){ 
     if(flt0_dur$Min[r]==flt0_dur$Max[r]){
       points(flt0_dur$Min[r],flt0_dur$Cat[r]-2,pch=16,lwd=2,cex=1.9,col=adjustcolor(cols[flt0_dur$Cat[r]-2],alpha.f = 0.2))}
     if(flt0_dur$Min[r]!=flt0_dur$Max[r]){
@@ -203,7 +189,6 @@ arrows((all_agg_ext$Mean-all_agg_ext$SD),c(3,2,1),(all_agg_ext$Mean+all_agg_ext$
          length=0.05,angle=90,code=3,lwd=1,col=rev(cols))  
   
 for(r in 1:nrow(flt0_ext)){
-    #r<-1  
 if(flt0_ext$Min[r]==flt0_ext$Max[r]){
       points(flt0_ext$Min[r],flt0_ext$Cat[r]-2,pch=16,lwd=2,cex=1.9,col=adjustcolor(cols[flt0_ext$Cat[r]-2],alpha.f = 0.2))}
 if(flt0_ext$Min[r]!=flt0_ext$Max[r]){
@@ -222,95 +207,3 @@ text(-18,4,paste0('d'),col='black',cex=1,pos=4, font=2)
 
 dev.off()
 }#plot
-
-
-
-
-
-
-
-#EVI and Area
-if (FALSE) {
-  tiff(file = paste0(wd,'graph/','Figure1extent.tif'), width = 89, height = 89, units = 'mm', res=300) 
-  par(oma=c(0.5,0.5,0.5,0.5),par(mar=c(1,1,0,0)),xpd=NA) 
-  #layout(matrix(c(1,2,3,4,5,6), 3, 2, byrow = FALSE),heights=c(1,1,1))
-  
-  #this study
-  if(TRUE){
-    #EVI
-    all_agg_EVI <- data.frame(matrix(nrow=3,ncol=3))
-    colnames(all_agg_EVI) <- c('Cat','Mean','SD')
-    all_agg_EVI$Cat <- c('h5','h4','h3')
-    for (cat in c('h5','h4','h3')){
-      #cat <- 'h5'
-      flt <- all %>%
-        filter(Time=='HurricaneSeasonRlt' & ImpactOverTimeCon==1 & Category==cat & Variable=='EVIRAnml')
-      maxInt <- abs(as.numeric(flt[which(flt$Median_dfc==min(flt$Median_dfc, na.rm = TRUE)),'Mean_dfc']))
-      sd <- flt[which(flt$Median_dfc==min(flt$Median_dfc, na.rm = TRUE)),'SD']
-      all_agg_EVI[which(all_agg_EVI$Cat==cat),'Mean'] <- as.numeric(maxInt)
-      all_agg_EVI[which(all_agg_EVI$Cat==cat),'SD'] <- as.numeric(sd)
-    }#loop for cat
-    all_agg_EVI <- all_agg_EVI[order(all_agg_EVI$Cat),]
-    
-    #area
-    all_agg_area <- data.frame(matrix(nrow=3,ncol=3))
-    colnames(all_agg_area) <- c('Cat','Mean','SD')
-    all_agg_area$Cat <- c('h5','h4','h3')
-    for (cat in c('h5','h4','h3')){
-      #cat <- 'h5'
-      flt <- all %>%
-        filter(Time=='HurricaneSeasonRlt' & ImpactOverTimeCon==1 & Category==cat & Variable=='totalAreaRAnml')
-      maxInt <- abs(as.numeric(flt[which(flt$Median_dfc==min(flt$Median_dfc, na.rm = TRUE)),'Mean_dfc']))
-      sd <- flt[which(flt$Median_dfc==min(flt$Median_dfc, na.rm = TRUE)),'SD']
-      all_agg_area[which(all_agg_area$Cat==cat),'Mean'] <- as.numeric(maxInt)
-      all_agg_area[which(all_agg_area$Cat==cat),'SD'] <- as.numeric(sd)
-    }#loop for cat
-    all_agg_area <- all_agg_area[order(all_agg_area$Cat),]
-    
-    plot(all_agg_EVI$Mean,all_agg_area$Mean,col=cols,pch=16,
-         ylim=c(0,1),xlim=c(0,1),xaxt='n',yaxt='n',xlab='',ylab='',bty='n')
-    arrows((all_agg_EVI$Mean-all_agg_EVI$SD),all_agg_area$Mean,(all_agg_EVI$Mean+all_agg_EVI$SD),all_agg_area$Mean,
-           length=0.05,angle=90,code=3,lwd=1,col=cols)  
-    arrows((all_agg_EVI$Mean),all_agg_area$Mean-all_agg_area$SD,(all_agg_EVI$Mean),all_agg_area$Mean+all_agg_area$SD,
-           length=0.05,angle=90,code=3,lwd=1,col=cols)
-  }
-  
-  #literature biomass
-  if(TRUE){
-    flt0_EVI <- data0 %>%
-      filter(Var=='Biomass') %>%
-      group_by(Cat) %>%
-      summarise(mx=max(Max),
-                mn=min(Min),
-                median=median(c(Max,Min)))
-    flt0_EVI <- flt0_EVI[order(flt0_EVI$Cat),]
-    
-    #points(flt0_EVI$median/100,all_agg_area$Mean,pch=4,col=adjustcolor(cols,alpha.f = 0.2))
-    arrows(flt0_EVI$mn/100,all_agg_area$Mean,flt0_EVI$mx/100,all_agg_area$Mean,
-           length=0.00,angle=90,code=3,lwd=4,col=adjustcolor(cols,alpha.f = 0.2))  
-  }
-  
-  #literature area
-  if(TRUE){
-    flt0_area <- data0 %>%
-      filter(Var=='Area') %>%
-      group_by(Cat) %>%
-      summarise(mx=max(Max),
-                mn=min(Min),
-                median=median(c(Max,Min)))
-    flt0_area <- flt0_area[order(flt0_area$Cat),]
-    
-    #points(all_agg_EVI$Mean,flt0_area$median/100,pch=4,col=adjustcolor(cols,alpha.f = 0.2))
-    arrows(all_agg_EVI$Mean,flt0_area$mn/100,all_agg_EVI$Mean,flt0_area$mx/100,
-           length=0.00,angle=90,code=3,lwd=4,col=adjustcolor(cols,alpha.f = 0.2))  
-  }
-  
-  axis(2,at=seq(0,1,0.2),labels=FALSE,tck=-0.02,col='black',col.ticks='black', col.axis='black')
-  axis(2,at=seq(0,1,0.2), labels=seq(0,1,0.2), lwd=0, line=-0.7,col.axis='black',cex.axis=0.5)
-  mtext('Fractional Change in Area', side=2, line=0.9, col='black', cex=0.55)
-  axis(1,at=seq(0,1,0.2),labels=FALSE,tck=-0.02,col='black',col.ticks='black', col.axis='black')
-  axis(1,at=seq(0,1,0.2), labels=seq(0,1,0.2), lwd=0, line=-1,col.axis='black',cex.axis=0.5)
-  mtext('Fractional Change in Biomass', side=1, line=0.6, col='black', cex=0.55)
-  dev.off()
-}#plot
-################
