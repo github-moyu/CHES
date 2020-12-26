@@ -1,5 +1,3 @@
-###h3-5 EVI and Area mean SD over time 10km (long graph)
-#############
 rm(list = ls())
 library(dplyr)
 
@@ -22,8 +20,6 @@ pnl <- letters[1:6]
 cols <- c(rgb(0.8,0.1,0.1),
           rgb(10,144,134,maxColorValue = 255),
           rgb(62,84,150, maxColorValue = 255))
-#rgb(77,79,83,maxColorValue = 255),
-#rgb(116,118,120, maxColorValue = 255))
 
 axscol <- 'black'
 arwcolleft <- axscol
@@ -48,9 +44,6 @@ if (TRUE) {
     axis(2,at=ax2,labels=FALSE,tck=-0.04,col=axscol,col.ticks=axscol, col.axis=axscol)
     axis(2,at=ax2, labels=ax2, lwd=0, line=-0.5,col.axis=axscol,cex.axis=0.8)
     mtext('Normalized Values         ', side=2, line=1.5, col=axscol, cex=0.55)
-#    text(par("usr")[2]*0.5,ylbspos[v],paste0(pnl[(v-1)*2+1]),col=axscol,cex=0.8,pos=4,font=2)
-#    text(par("usr")[2]*0.57,ylbspos[v],paste0(ylbs[v], ', ', 'EVI'),col=axscol,cex=0.8,pos=4)
-    #text(par("usr")[2]*0.5,ylbspos[v],paste0(pnl[(v-1)*2+1],' ',ylbs[v], ', ', 'EVI'),col=axscol,cex=0.8,pos=4)
     text(par("usr")[2]*0.5,ylbspos[v],paste0(ylbs[v], ', ', 'EVI'),col=axscol,cex=0.8,pos=4)
     
     arrows(-1,0.5,3.75,0.5,col='grey',lty=3,length=0)
@@ -75,15 +68,11 @@ if (TRUE) {
   }
   #Area
   for (v in 1:length(vars)){
-    #v <- 1
     data_plot <- all %>%
       filter(Time=='HurricaneSeasonRlt' & Variable== 'totalAreaRAnml'  & Distance == 10 & Category == vars[v])
     
     plot(data_plot$Level-0.125,rep(1,nrow(data_plot)),xlim=c(-1,4),ylim=ylm,col='white',xaxt='n',yaxt='n',xlab='',ylab='',bty='n')
     axis(2,at=ax2,labels=FALSE,tck=-0.04,col=axscol,col.ticks=axscol, col.axis=axscol)
-#    text(par("usr")[2]*0.5,ylbspos[v],paste0(pnl[(v-1)*2+2]),col=axscol,cex=0.8,pos=4,font=2)
-#    text(par("usr")[2]*0.57,ylbspos[v],paste0(ylbs[v],', ','Area'),col=axscol,cex=0.8,pos=4)
-    #text(par("usr")[2]*0.5,ylbspos[v],paste0(pnl[(v-1)*2+2],' ',ylbs[v],', ','Area'),col=axscol,cex=0.8,pos=4)
     text(par("usr")[2]*0.5,ylbspos[v],paste0(ylbs[v],', ','Area'),col=axscol,cex=0.8,pos=4)
     
     arrows(-1,0.5,3.75,0.5,col='grey',lty=3,length=0)
@@ -104,4 +93,3 @@ if (TRUE) {
   }
   dev.off()
 }#plot
-################
