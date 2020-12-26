@@ -1,8 +1,3 @@
-#For guidance, Nature's standard figure sizes are 89 mm wide (single column) and 183 mm wide (double column). 
-#The full depth of a Nature page is 247 mm. Figures can also be a column-and-a-half where necessary (120-136 mm).
-
-###scater arrow with uncertainty
-##########
 rm(list = ls())
 library(shape)
 library(plotrix)
@@ -15,13 +10,7 @@ frq <- frq[which((frq$h5 + frq$h4 + frq$h3)!=0),]
 frq[is.na(frq)]<-0
 
 data <- merge(rsk,frq,by=c('ISO3','Name','FID','SUM_AREA_K','Shape'))
-#cols <- c(rgb(62,84,150, maxColorValue = 255),
-#          rgb(10,144,134,maxColorValue = 255),
-#          rgb(0.8,0.1,0.1),
-#          NA)
 
-#colinc <- 'darkred'
-#coldcr <- 'darkgreen'
 colinc <- rgb(173,19,19, maxColorValue = 255)
 coldcr <- rgb(52,83,142, maxColorValue = 255)
 
@@ -112,4 +101,3 @@ text(data$RiskChgPct[which(data$ISO3 %in% cntyChg)]+
 }
 dev.off()
 }
-#
