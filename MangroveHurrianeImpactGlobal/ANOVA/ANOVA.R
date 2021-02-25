@@ -96,7 +96,7 @@ for (i in 1:length(distances)){
 }#Northern Hemisphere
 
 if (bsn %in% c('SP','SI','SA')){
-if (hmo %in% seq(1:6)){
+if (hmo %in% seq(1,6,1)){
 data0$Month <- data0$Month + 7   
 data0$Year[which(data0$Month>12)] <- data0$Year[which(data0$Month>12)] +1 
 data0$Month[which(data0$Month>12)] <- data0$Month[which(data0$Month>12)] -12 
@@ -164,7 +164,7 @@ dataNew<-rbind(dataNew,data_d)
 }#distance loop   
 }#first half of year
   
-if (hmo %in% seq(6:12)){
+if (hmo %in% seq(6,12,1)){
 data_d$Month <- data_d$Month - 5   
 data_d$Year[which(data_d$Month < 1)] <- data_d$Year[which(data_d$Month < 1)] - 1 
 data_d$Month[which(data_d$Month < 1 )] <- data_d$Month[which(data_d$Month < 1  )] + 12 
