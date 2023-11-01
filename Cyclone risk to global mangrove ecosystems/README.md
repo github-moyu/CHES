@@ -1,1 +1,0 @@
-This site contains code for the study "Tropical cyclone risk to global mangrove ecosystems: delayed damage and divergent changes". 
